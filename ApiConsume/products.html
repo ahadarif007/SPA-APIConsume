@@ -1,0 +1,401 @@
+<html>
+
+<head>
+    <title>Beginning Inventory</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <link rel="stylesheet" href="style.css">
+    </link>
+    <script type="text/javascript" src="moment.js"></script>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" />
+
+    <script type="text/javascript" src="jquery-3.4.1.js"></script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <script type="text/javascript" src="products.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+
+
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.6.2/css/buttons.dataTables.min.css">
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.2/js/dataTables.buttons.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.html5.min.js"></script>
+</head>
+
+<body style="padding-top: 0px" class="bg-formal">
+
+    <!--******************************************************************************************************************************************-->
+    <!--******************************************************************************************************************************************-->
+    <!--******************************************************************************************************************************************-->
+    <!--******************************************************************************************************************************************-->
+    <!--******************************************************************************************************************************************-->
+    <!--******************************************************************************************************************************************-->
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Shop Management System</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="products.html">Product</a></li>
+                    <li><a href="memos.html">Memo</a></li>
+                    <li><a href="sells.html">Sell</a></li>
+                    <li><a href="purchases.html">Purchase</a></li>
+                    <li><a href="sellReturn.html">Sells Return</a></li>
+                    <li><a href="purchaseReturn.html">Purchase Return</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                            aria-expanded="false">Search and Reporting<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="AdvancedProductSearch.html">Advanced Product Search</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li class="dropdown-header">Not Implimented Yet</li>
+                            <li><a href="#">Advanced Memo Search</a></li>
+                            <li><a href="#">Advanced sells Search</a></li>
+                            <li><a href="#">Advanced Purchase Search</a></li>
+
+
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#">Logout</a></li>
+                </ul>
+            </div>
+            <!--/.nav-collapse -->
+        </div>
+    </nav>
+    <!--******************************************************************************************************************************************-->
+    <!--******************************************************************************************************************************************-->
+    <!--******************************************************************************************************************************************-->
+    <!--******************************************************************************************************************************************-->
+    <!--******************************************************************************************************************************************-->
+    <!--******************************************************************************************************************************************-->
+
+    <!-- Heading jumbotron-->
+    <div class="jumbotron">
+        <div class="container">
+            <br><br><br><br><br>
+            <h1 class="display-3 text-white">Opening Inventory</h1>
+
+
+            <div id="clock-div" class="text text-uppercase text-white"></div>
+            <script>
+                let renderclock = function () {
+                    $("#clock-div").html("<h3>" + moment().format(' D,MMMM YYYY, h:mm:ss a') + "</h3>");
+                }
+                renderclock();
+                setInterval(renderclock, 1000);
+            </script>
+
+        </div>
+    </div>
+    <!--******************************************************************************************************************************************-->
+    <!--******************************************************************************************************************************************-->
+    <!--******************************************************************************************************************************************-->
+    <!--******************************************************************************************************************************************-->
+    <!--******************************************************************************************************************************************-->
+    <!--******************************************************************************************************************************************-->
+    <!-- Cards-->
+    <div class="col-md-2 col-md-offset-3">
+        <div>
+            <div class="panel panel-info">
+                <div class="panel-heading bg-sky">
+
+                    <h1 class="text-white"> Create New Product</h1>
+                    <hr style=" border: 2px solid black;border-radius: 2px;">
+                    <button type="button" class="btn btn-black btn-lg" id="btn-create">Insert New </button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2 ">
+        <div>
+            <div class="panel panel-warning">
+                <div class="panel-heading bg-yellow">
+
+                    <h1 class="text-white"> Load Product Table</h1>
+                    <hr style=" border: 2px solid black;border-radius: 2px;">
+                    <button id="load" class="btn btn-blue btn-lg">
+                        Load all
+                    </button>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--******************************************************************************************************************************************-->
+    <!--******************************************************************************************************************************************-->
+    <!--******************************************************************************************************************************************-->
+    <!--******************************************************************************************************************************************-->
+    <!--******************************************************************************************************************************************-->
+    <!--******************************************************************************************************************************************-->
+    <!-- insert modal-->
+    <!-- Modal -->
+    <div class="modal fade" id="create-Modal" role="dialog">
+        <div class="modal-dialog modal-lg " style="width:90%;">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header modal-header-blue">
+                    <!--style="padding:35px 50px;"> -->
+                    <h1> Add New Product</h1>
+                </div>
+                <div class="modal-body " style="padding:40px 50px;">
+                    <table class="table table-bordered">
+                        <tbody>
+                            <tr>
+                                <td>ProductName :</td>
+                                <td>
+                                    <input type="text" class="form-control" id="ProductName" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>ProductDescription:</td>
+                                <td>
+                                    <input type="text" class="form-control" id="ProductDescription" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Quantity :</td>
+                                <td>
+                                    <input type="number" class="form-control" id="Quantity" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Price:</td>
+                                <td><input type="number" class="form-control" id="Price" /></td>
+                            </tr>
+
+                            <tr class="info">
+                                <td colspan="2">
+
+                                    <input id="create" class="btn btn-info btn-lg" type="button"
+                                        value="Create New Product" />
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal">
+                        <span class="glyphicon glyphicon-remove"></span> Cancel
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+
+    <!--******************************************************************************************************************************************-->
+    <!--******************************************************************************************************************************************-->
+    <!--******************************************************************************************************************************************-->
+    <!--******************************************************************************************************************************************-->
+    <!--******************************************************************************************************************************************-->
+    <!--******************************************************************************************************************************************-->
+    <!-- Update modal -->
+    <!-- Modal -->
+    <div class="modal fade" id="upd-Modal" role="dialog">
+        <div class="modal-dialog modal-lg " style="width:90%;">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header modal-header-yellow">
+                    <!--style="padding:35px 50px;"> -->
+                    <h1> Update Existing Product</h1>
+                </div>
+                <div class="modal-body " style="padding:40px 50px;">
+                    <table class="table table-bordered">
+                        <tbody>
+                            <tr>
+                                <td>ProductId :</td>
+                                <td id="updProductId">
+
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>ProductName :</td>
+                                <td>
+                                    <input type="text" class="form-control" id="updProductName" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>ProductDescription:</td>
+                                <td>
+                                    <input type="text" class="form-control" id="updProductDescription" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Quantity :</td>
+                                <td>
+                                    <input type="text" class="form-control" id="updQuantity" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Price:</td>
+                                <td><input type="text" class="form-control" id="updPrice" /></td>
+                            </tr>
+
+                            <tr class="info">
+                                <td colspan="2">
+                                    <input id="update" class="btn btn-yellow btn-lg" type="button"
+                                        value="Update Existing Product" />
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal">
+                        <span class="glyphicon glyphicon-remove"></span> Cancel
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!--******************************************************************************************************************************************-->
+    <!--******************************************************************************************************************************************-->
+    <!--******************************************************************************************************************************************-->
+    <!--******************************************************************************************************************************************-->
+    <!--******************************************************************************************************************************************-->
+    <!--******************************************************************************************************************************************-->
+    <!-- Delete Modal-->
+    <div class="modal fade" id="dlt-Modal" role="dialog">
+        <div class="modal-dialog modal-lg " style="width:90%;">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header modal-header-red">
+                    <!--style="padding:35px 50px;"> -->
+                    <h1> Delete Product </h1>
+                </div>
+                <div class="modal-body " style="padding:40px 50px;">
+                    <table class="table table-bordered">
+                        <tr>
+                            <td>Product Id :</td>
+                            <td><label id="dltProductId"> </label></td>
+                        </tr>
+                        <tr>
+                            <td>ProductName :</td>
+                            <td>
+                                <span id="dltProductName"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>ProductDescription:</td>
+                            <td>
+                                <span id="dltProductDescription"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Quantity :</td>
+                            <td>
+                                <span id="dltQuantity"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Price:</td>
+                            <td><span id="dltPrice"> </span></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>
+                                <button id="delete" class="btn btn-red btn-lg">
+                                    Delete This Product
+                                </button>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal">
+                        <span class="glyphicon glyphicon-remove"></span> Cancel
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <!--******************************************************************************************************************************************-->
+    <!--******************************************************************************************************************************************-->
+    <!--******************************************************************************************************************************************-->
+    <!--******************************************************************************************************************************************-->
+    <!--******************************************************************************************************************************************-->
+    <!--******************************************************************************************************************************************-->
+    <!-- data table-->
+
+    <div class="col-md-10 col-md-offset-1" id="tbl-main">
+        <div>
+            <div class="panel panel-success">
+                <div class="panel-heading bg-green">
+                    <h1>Product Data Table</h1>
+                </div>
+                <div class="panel-body">
+                    <table id="list" class="table table-responsive table-bordered tbl-custom" style="width: 100%;">
+                        <thead>
+                            <tr>
+                                <th style="display:none;">Id</th>
+                                <th>Product Name</th>
+                                <th>Description</th>
+                                <th>Quantity</th>
+                                <th>Price</th>
+                                <th>Created On</th>
+                                <th>Modified On</th>
+                                <th>Action</th>
+                                <th>Remarks</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+
+                        <tfoot>
+                            <tr>
+                                <th style="display:none;">Id</th>
+                                <th>Product Name</th>
+                                <th>Description</th>
+                                <th>Quantity</th>
+                                <th>Price</th>
+                                <th>Created On</th>
+                                <th>Modified On</th>
+                                <th>Action</th>
+                                <th>remarks</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--******************************************************************************************************************************************-->
+    <!--******************************************************************************************************************************************-->
+    <!--******************************************************************************************************************************************-->
+    <!--******************************************************************************************************************************************-->
+    <!--******************************************************************************************************************************************-->
+    <!--******************************************************************************************************************************************-->
+
+</body>
+
+</html>

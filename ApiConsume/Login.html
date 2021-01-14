@@ -1,0 +1,130 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+    
+    <script src="Scripts/jquery-3.4.1.min.js"></script>
+    <script src="Scripts/bootstrap.min.js"></script>
+    <script src="Scripts/GoogleAuthentication.js"></script>
+</head>
+<body style="padding-top:20px">
+    <div class="col-md-10 col-md-offset-1">
+        <div class="well">
+            <!--Table to capture username and password-->
+            <table class="table table-bordered">
+                <thead>
+                    <tr class="success">
+                        <th colspan="2">
+                            Existing User Login
+                            <a href="Register.html" class="btn btn-success pull-right">
+                                Register
+                            </a>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Usename</td>
+                        <td>
+                            <input type="text" id="txtUsername" placeholder="Username" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Password</td>
+                        <td>
+                            <input type="password" id="txtPassword"
+                                   placeholder="Password" />
+                        </td>
+                    </tr>
+                    <tr class="success">
+                        <td colspan="2">
+                            <input id="btnLogin" class="btn btn-success" type="button"
+                                   value="Login" />
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- Table to show social login button-->
+            <table class="table table-bordered">
+                <thead>
+                    <tr class="success">
+                        <th>
+                            Social Login                          
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        
+                        <td>
+                            <input type="button" id="btnGoogleLogin" class="btn btn-success" value="Login with Google" />
+                        </td>
+                    </tr>
+                    
+                    
+                </tbody>
+            </table>
+
+            
+            <!--Bootstrap alert to display error message if the login fails-->
+            <div id="divError" class="alert alert-danger collapse">
+                <a id="linkClose" href="#" class="close">&times;</a>
+                <div id="divErrorText"></div>
+            </div>
+
+
+        </div>
+    </div>
+    
+    <!--main Script goes here-->
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            // working of getAccessToken() function 
+            //>> check if registered 
+                //>> local storage save data if registered , redirect to data.html. 
+                //>> do register if not registered and ridirect to this uri to run same proceess again.this time it's registered 
+            
+            getAccessToken();
+
+            $('#btnGoogleLogin').click(function () {
+                window.location.href = 'https://localhost:44360/api/Account/ExternalLogin?provider=Google&response_type=token&client_id=self&redirect_uri=https%3A%2F%2Flocalhost%3A44360%2FLogin.html&state=t4Ev1yfVYEXXi_nHDlw7VMEVClbhPuP3uGlsTQeh-6Q1' });
+            $('#linkClose').click(function () {
+                $('#divError').hide('fade');
+            });
+
+            $('#btnLogin').click(function () {
+                $.ajax({
+                    // Post username, password & the grant type to /token
+                    url: 'https://localhost:44360/token',
+                    method: 'POST',
+                    contentType: 'application/json',
+                    dataType:'JSON',
+                    data: {
+                        username: $('#txtUsername').val(),
+                        password: $('#txtPassword').val(),
+                        grant_type: 'password'
+                    },
+                    
+                    success: function (response) {
+                        //$('#divErrorText').text(JSON.stringify(response));
+                        //$('#divError').show('fade');
+                        localStorage.setItem("accessToken", response.access_token);
+                        localStorage.setItem("userName", response.userName)
+                        window.location.href = "Data.html";
+                    },
+                    // Display errors if any in the Bootstrap alert <div>
+                    error: function (jqXHR) {
+                        $('#divErrorText').text(jqXHR.responseText);
+                        $('#divError').show('fade');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,340 @@
+<html>
+
+<head>
+  <title>Advance Product Search</title>
+  <link rel="stylesheet" href="style.css">
+  </link>
+  <script type="text/javascript" src="moment.js"></script>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" />
+
+  <script type="text/javascript" src="jquery-3.4.1.js"></script>
+
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+  <script type="text/javascript" src="AdvancedProductSearch.js"></script>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
+  <script type="text/javascript" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+
+
+
+
+  <script type="text/javascript" src="download.js"></script>
+
+
+
+  <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.6.2/css/buttons.dataTables.min.css">
+  <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.2/js/dataTables.buttons.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+  <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.html5.min.js"></script>
+</head>
+
+
+<body style="padding-top: 110px;">
+  <!-- Nav Bar for everyone-->
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+          aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">Shop Management System</a>
+      </div>
+      <div id="navbar" class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+          <li><a href="products.html">Product</a></li>
+          <li><a href="memos.html">Memo</a></li>
+          <li><a href="sells.html">Sell</a></li>
+          <li><a href="purchases.html">Purchase</a></li>
+          <li><a href="sellReturn.html">Sells Return</a></li>
+          <li><a href="purchaseReturn.html">Purchase Return</a></li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+              aria-expanded="false">Search and Reporting<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li class="active"><a href="AdvancedProductSearch.html">Advanced Product Search</a></li>
+              <li role="separator" class="divider"></li>
+              <li class="dropdown-header">Not Implimented Yet</li>
+              <li><a href="#">Advanced Memo Search</a></li>
+              <li><a href="#">Advanced sells Search</a></li>
+              <li><a href="#">Advanced Purchase Search</a></li>
+
+
+            </ul>
+          </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="#">Logout</a></li>
+        </ul>
+      </div>
+      <!--/.nav-collapse -->
+    </div>
+  </nav>
+  <!--******************************************************************************************************************************************-->
+  <div class="col-md-10 col-md-offset-1">
+
+    <!-- Advanced Search -->
+
+    <div class="panel panel-default">
+      <div class="panel-heading bg-sky">
+        <h1>Advanced Search Options</h1>
+      </div>
+      <div class="panel-body">
+        <table class="table table-bordered table-responsive">
+          <tr class="success">
+            <th>
+              Product Id
+              <input type="text" id="srcProductId" class="form-control" placeholder="Search Product Id" />
+            </th>
+            <th>
+              Product Name
+              <input type="text" id="srcProductName" class="form-control" placeholder="Search Product Name" />
+            </th>
+            <th>
+              Product Description
+              <input type="text" id="srcProductDescription" class="form-control"
+                placeholder="Search Product Description" />
+            </th>
+          </tr>
+          <tr class="info">
+            <th>
+              Quantity Range
+              <input type="number" id="minQuantity" class="form-control" placeholder=" Minimum Quantity" />
+              <input type="number" id="maxQuantity" class="form-control" placeholder=" Maximum Quantity" />
+            </th>
+
+            <th>
+              Price Range
+              <input type="number" id="minPrice" class="form-control" placeholder=" Minimum Price" />
+              <input type="number" id="maxPrice" class="form-control" placeholder=" Maximum Price" />
+            </th>
+
+            <th>
+              Created Between
+              <input type="date" class="form-control" name="minCreatedDate" id="minCreatedDate" />
+              <input type="date" class="form-control" name="maxCreatedDate" id="maxCreatedDate" />
+            </th>
+          </tr>
+
+          <tr class="alert-danger">
+            <th>
+              Modified Date Between
+              <input type="date" class="form-control" name="minModifiedDate" id="minModifiedDate" />
+              <input type="date" class="form-control" name="maxModifiedDate" id="maxModifiedDate" />
+            </th>
+            <th>
+              Last Purchased Date Between
+              <input type="date" class="form-control" name="minLastPurchasedDate" id="minLastPurchasedDate" />
+              <input type="date" class="form-control" name="maxLastPurchasedDate" id="maxLastPurchasedDate" />
+            </th>
+            <th>
+              Last Sold Date Between
+              <input type="date" class="form-control" name="minLastSoldDate" id="minLastSoldDate" />
+              <input type="date" class="form-control" name="maxLastSoldDate" id="maxLastSoldDate" />
+            </th>
+          </tr>
+        </table>
+        <button id="Search" class="btn btn-black btn-lg">search</button>
+        <button id="downloadSrc" class="btn btn-red btn-lg">Download Search Result as Pdf</button>
+      </div>
+      <div class="panel-footer">
+        (all data will be presented if all search field kept empty)
+      </div>
+    </div>
+
+
+  </div>
+  </div>
+
+  <!--******************************************************************************************************************************************-->
+  <!-- Search Result-->
+  <div class="col-md-10 col-md-offset-1" id="searchResult">
+
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h1>Advanced Product Search Result</h1>
+      </div>
+      <div class="panel-body">
+        <table id="newlist" class="table table-striped table-bordered">
+          <thead>
+            <tr>
+              <th>Id</th>
+              <th>Product Name</th>
+              <th>Description</th>
+              <th>Quantity</th>
+              <th>Price</th>
+              <th>Created On</th>
+              <th>Modified On</th>
+              <th>Last Purchased</th>
+              <th>Last Sold</th>
+              <th>Remarks</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+
+          <tfoot>
+            <tr>
+              <th>Id</th>
+              <th>Product Name</th>
+              <th>Description</th>
+              <th>Quantity</th>
+              <th>Price</th>
+              <th>Created On</th>
+              <th>Modified On</th>
+              <th>Last Purchased</th>
+              <th>Last Sold</th>
+              <th>Action</th>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </div>
+
+  </div>
+
+
+  <!-- sell and purchase history -->
+  <!-- Data table of invoice -->
+  <div class="col-md-10 col-md-offset-1" id="tbl">
+
+    <div class="panel panel-success">
+      <div class="panel-heading">
+        <h1>Purchase History</h1>
+      </div>
+      <div class="panel-body">
+        <table id="mainlist" class="table table-striped table-bordered table-responsive">
+          <thead>
+            <tr>
+              <th>PurchaseId</th>
+              <th>MemoNumber</th>
+              <th>ProductId</th>
+              <th>ProductName</th>
+              <th>PurchaseDate</th>
+              <th>Quantity</th>
+              <th>Price</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+
+
+
+
+    <!--custom modal -->
+    <style>
+      .modal-header {
+        background-color: #5cb85c;
+        color: white !important;
+        text-align: center;
+        font-size: 30px;
+      }
+
+      .modal-body {
+        overflow-x: auto;
+      }
+
+      .modal-footer {
+        background-color: #f9f9f9;
+      }
+    </style>
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" role="dialog">
+      <div class="modal-dialog modal-lg " style="width:90%;">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <!--style="padding:35px 50px;"> -->
+            <h1> Purchase history</h1>
+          </div>
+          <div class="modal-body " style="padding:40px 50px;">
+
+            <table id="mainlist" class="table table-striped table-bordered table-responsive">
+              <thead>
+                <tr>
+                  <th>PurchaseId</th>
+                  <th>MemoNumber</th>
+                  <th>ProductId</th>
+                  <th>ProductName</th>
+                  <th>PurchaseDate</th>
+                  <th>Quantity</th>
+                  <th>Price</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+
+
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal">
+              <span class="glyphicon glyphicon-remove"></span> Cancel
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <button type="button" class="btn btn-default btn-lg" id="myBtn">Login</button>
+    <script>
+      $(document).ready(function () {
+        $("#myBtn").click(function () {
+          $("#myModal").modal();
+        });
+      });
+    </script>
+
+
+    <!--  basic modal structure -->
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" role="dialog">
+      <div class="modal-dialog modal-lg " style="width:90%;">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <!--style="padding:35px 50px;"> -->
+            <h1> heading</h1>
+          </div>
+          <div class="modal-body " style="padding:40px 50px;">
+
+
+
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal">
+              <span class="glyphicon glyphicon-remove"></span> Cancel
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <button type="button" class="btn btn-default btn-lg" id="myBtn">Login</button>
+    <script>
+      $(document).ready(function () {
+        $("#myBtn").click(function () {
+          $("#myModal").modal();
+        });
+      });
+    </script>
+
+
+</body>
+
+</html>

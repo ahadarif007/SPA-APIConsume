@@ -1,0 +1,54 @@
+<html>
+<head>
+	<title>API Client</title>
+	<script type="text/javascript" src="jquery-3.4.1.js"></script>
+	<script type="text/javascript" src="myScript.js"></script>
+</head>
+<body>
+	<h2>Department Management</h2>
+	<table>
+		<tr>
+			<td>Department Name</td>
+			<td><input type="text" id="deptName"/></td>
+		</tr>
+		<tr>
+			<td>Department Location</td>
+			<td><input type="text" id="deptLoc"/></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td><button id="create">Create</button></td>
+		</tr>
+	</table>
+	<hr/>
+	<table>
+		<tr>
+			<td>Department Id</td>
+			<td><input type="text" id="deptId"/></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td><button id="delete">Delete</button></td>
+		</tr>
+	</table>
+	<hr/>
+	<br/>
+	<button id="load">Load Data</button>
+	<br/>
+	<label id="msg"></label>
+	<br/><br/>
+	<table id="list" border="1">
+		<thead>
+			<tr>
+				<th>Department ID</th>
+				<th>Department Name</th>
+				<th>Location</th>
+			</tr>
+		</thead>
+		<tbody>
+
+		</tbody>
+	</table>
+
+</body>
+</html>

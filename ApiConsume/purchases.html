@@ -1,0 +1,622 @@
+<html>
+
+<head>
+    <title>API Client Product CURD</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" />
+
+    <script type="text/javascript" src="jquery-3.4.1.js"></script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <script type="text/javascript" src="purchases.js"></script>
+
+
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.6.2/css/buttons.dataTables.min.css">
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.2/js/dataTables.buttons.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.html5.min.js"></script>
+
+    <script src="Scripts/jspdf.js"></script>
+    <script src="Scripts/pdfFromHTML.js"></script>
+</head>
+
+
+<body style="padding-top: 110px;">
+    <!--*************************************************************************************************************************************-->
+    <!--*************************************************************************************************************************************-->
+    <!--*************************************************************************************************************************************-->
+    <!--*************************************************************************************************************************************-->
+    <!--*************************************************************************************************************************************-->
+    <!--*************************************************************************************************************************************-->
+    <!-- Nav Bar for everyone-->
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Shop Management System</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="products.html">Product</a></li>
+                    <li><a href="memos.html">Memo</a></li>
+                    <li><a href="sells.html">Sell</a></li>
+                    <li class="active"><a href="purchases.html">Purchase</a></li>
+                    <li><a href="sellReturn.html">Sells Return</a></li>
+                    <li><a href="purchaseReturn.html">Purchase Return</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                            aria-expanded="false">Search and Reporting<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="AdvancedProductSearch.html">Advanced Product Search</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li class="dropdown-header">Not Implimented Yet</li>
+                            <li><a href="#">Advanced Memo Search</a></li>
+                            <li><a href="#">Advanced sells Search</a></li>
+                            <li><a href="#">Advanced Purchase Search</a></li>
+
+
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#">Logout</a></li>
+                </ul>
+            </div>
+            <!--/.nav-collapse -->
+        </div>
+    </nav>
+
+    <!--*************************************************************************************************************************************-->
+    <!--*************************************************************************************************************************************-->
+    <!--*************************************************************************************************************************************-->
+    <!--*************************************************************************************************************************************-->
+    <!--*************************************************************************************************************************************-->
+    <!--*************************************************************************************************************************************-->
+    <!-- Heading banner-->
+    <div class="col-md-10 col-md-offset-1">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <br>
+                <h1 align="center">Purchasing Process</h1>
+                <br>
+            </div>
+        </div>
+    </div>
+    <!--*************************************************************************************************************************************-->
+    <!--*************************************************************************************************************************************-->
+    <!--*************************************************************************************************************************************-->
+    <!--*************************************************************************************************************************************-->
+    <!--*************************************************************************************************************************************-->
+    <!--*************************************************************************************************************************************-->
+    <!--click button to load all onGoing Memos -->
+    <div class="col-md-10 col-md-offset-1">
+        <div class="well">
+            <!-- Load All Data-->
+            <button id="loadNonProcessedMemos" class="btn btn-success btn-lg">
+                Load All Unconfirmed Purchases
+            </button>
+            <br />
+            <label id="msgloadNonProcessedMemos"></label>
+        </div>
+    </div>
+    <!--*************************************************************************************************************************************-->
+    <!--*************************************************************************************************************************************-->
+    <!--*************************************************************************************************************************************-->
+    <!--*************************************************************************************************************************************-->
+    <!--*************************************************************************************************************************************-->
+    <!--*************************************************************************************************************************************-->
+    <!--Load memo data table (ongoing purchase-->
+    <div class="col-md-10 col-md-offset-1">
+        <div class="well">
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <h1>Memos Data Table</h1>
+                </div>
+                <div class="panel-body">
+                    <table id="list1" class="table table-responsive table-bordered">
+                        <thead>
+                            <tr>
+                                <th>AutoId</th>
+                                <th>MemoNumber</th>
+                                <th>MemoDescription</th>
+                                <th>CreatedOn</th>
+                                <th>BelongsTo</th>
+                                <th>Status</th>
+
+                                <th class="col-md-1">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+
+                        <tfoot>
+                            <tr>
+                                <th>autoId</th>
+                                <th>MemoNumber</th>
+                                <th>MemoDescription</th>
+                                <th>CreatedOn</th>
+                                <th>BelongsTo</th>
+                                <th>Status</th>
+
+                                <th class="col-md-1">Action</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--*************************************************************************************************************************************-->
+    <!--*************************************************************************************************************************************-->
+    <!--*************************************************************************************************************************************-->
+    <!--*************************************************************************************************************************************-->
+    <!--*************************************************************************************************************************************-->
+    <!--*************************************************************************************************************************************-->
+    <!-- Selected Memo to process   -->
+    <div class="col-md-10 col-md-offset-1" id="sltmemo">
+        <div class="well">
+            <div class="panel panel-danger">
+                <div class="panel-heading">
+                    <h1>Selected Memo</h1>
+                </div>
+                <div class="panel-body">
+                    <table class="table table-bordered">
+                        <tr>
+                            <td>autoId :</td>
+                            <td id="sltautoId">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>MemoNumber :</td>
+                            <td>
+                                <label id="sltMemoNumber"></label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>MemoDescription:</td>
+                            <td>
+                                <label id="sltMemoDescription"></label>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>CreatedOn:</td>
+                            <td>
+                                <label id="sltCreatedOn"></label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>BelongsTo:</td>
+                            <td>
+                                <label id="sltBelongsTo"></label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Status :</td>
+                            <td><label id="sltStatus"></label></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>
+                                <button id="goToProductSelectionTable" class="btn btn-danger btn-lg">
+                                    Select Product for this Memo
+                                </button>
+                                <button id="showThisMemoInfo" class="btn btn-success btn-lg">
+                                    Load This memo
+                                </button>
+                            </td>
+                        </tr>
+                    </table>
+                    <label id="msgsltmemo" class="text text-danger"></label>
+                </div>
+                <div class="panel-footer panel-danger">
+
+                    <br>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!--*************************************************************************************************************************************-->
+    <!--*************************************************************************************************************************************-->
+    <!--*************************************************************************************************************************************-->
+    <!--*************************************************************************************************************************************-->
+    <!--*************************************************************************************************************************************-->
+    <!--*************************************************************************************************************************************-->
+    <!-- done select product from this data table-->
+    <div class="col-md-10 col-md-offset-1">
+        <div class="well">
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <h1>Select Product to purchase from this Data Table</h1>
+                </div>
+                <div class="panel-body">
+                    <table id="list2" class="table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Product Name</th>
+                                <th>Description</th>
+                                <th>Quantity</th>
+                                <th>Price</th>
+                                <th>Created On</th>
+                                <th>Modified On</th>
+                                <th>Last Purchased</th>
+                                <th>Last Sold</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+
+                        <tfoot>
+                            <tr>
+                                <th>Id</th>
+                                <th>Product Name</th>
+                                <th>Description</th>
+                                <th>Quantity</th>
+                                <th>Price</th>
+                                <th>Created On</th>
+                                <th>Modified On</th>
+                                <th>Last Purchased</th>
+                                <th>Last Sold</th>
+                                <th>Action</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+                <div class="panel-footer panel-danger text text-warning">
+                    Create Product if it does not exists in this table
+                    <br>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--*************************************************************************************************************************************-->
+    <!--*************************************************************************************************************************************-->
+    <!--*************************************************************************************************************************************-->
+    <!--*************************************************************************************************************************************-->
+    <!--*************************************************************************************************************************************-->
+    <!--*************************************************************************************************************************************-->
+
+    <div class="col-md-10 col-md-offset-1" id="slt2product">
+        <div class="well">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h1>Add Product to The Purchase List</h1>
+                </div>
+                <div class="panel-body">
+                    <table class="table table-bordered">
+                        <tbody>
+                            <tr>
+                                <td>ProductId :</td>
+                                <td id="slt2ProductId">
+
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>ProductName :</td>
+                                <td>
+                                    <label id="slt2ProductName"></label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>ProductDescription:</td>
+                                <td>
+                                    <label id="slt2ProductDescription"><label>
+                                </td>
+                            </tr>
+                            <tr>
+
+                                <td>Quantity:
+                                    <div class="text text-muted">
+                                        Already Avilable in Stock
+                                        <label id="slt2Quantity"></label>
+                                    </div>
+                                </td>
+
+
+                                <td>
+                                    <input type="text" class="form-control" id="slt2Quantity1" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Price:
+                                    <div class="text text-muted"> In Stock Purchased at:
+                                        <label id="slt2Price" class="text text-muted"></label>
+                                    </div>
+                                </td>
+                                <td><input type="text" class="form-control" id="slt2Price1" /></td>
+                            </tr>
+
+                            <tr class="info">
+                                <td colspan="2">
+                                    <input id="addToInvoice" class="btn btn-info btn-lg" type="button"
+                                        value="Add this Product to the Purchase Invoice" />
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <label id="addToInvoicemsg" class="text text-danger"></label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--*************************************************************************************************************************************-->
+    <!--*************************************************************************************************************************************-->
+    <!--*************************************************************************************************************************************-->
+    <!--*************************************************************************************************************************************-->
+    <!--*************************************************************************************************************************************-->
+    <!--*************************************************************************************************************************************-->
+    <!--
+                 PurchaseId
+                MemoNumber
+                ProductId
+                ProductName
+                PurchaseDate
+                Quantity
+                Price
+
+             -->
+    <!--*************************************************************************************************************************************-->
+    <!--*************************************************************************************************************************************-->
+    <!--*************************************************************************************************************************************-->
+    <!--*************************************************************************************************************************************-->
+    <!--*************************************************************************************************************************************-->
+    <!--*************************************************************************************************************************************-->
+    <!-- Data table of invoice -->
+    <div class="col-md-10 col-md-offset-1" id="tbl">
+        <div class="well">
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <h1>Purchase List Memo Data Table</h1>
+                </div>
+                <div class="panel-body">
+                    <table id="mainlist" class="table table-striped table-bordered table-responsive">
+                        <thead>
+                            <tr>
+                                <th>PurchaseId</th>
+                                <th>MemoNumber</th>
+                                <th>ProductId</th>
+                                <th>ProductName</th>
+                                <th>PurchaseDate</th>
+                                <th>Quantity</th>
+                                <th>Price</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--*************************************************************************************************************************************-->
+    <!--*************************************************************************************************************************************-->
+    <!--*************************************************************************************************************************************-->
+    <!--*************************************************************************************************************************************-->
+    <!--*************************************************************************************************************************************-->
+    <!--*************************************************************************************************************************************-->
+    <!-- update product entry in memo-->
+    <!-- 
+                 PurchaseId
+                MemoNumber
+                ProductId
+                ProductName
+                PurchaseDate
+                Quantity
+                Price 
+-->
+    <div class="col-md-10 col-md-offset-1" id="upd">
+        <div class="well">
+            <div class="panel panel-warning">
+                <div class="panel-heading">
+                    <h1>Update Product Entry in memo</h1>
+                </div>
+                <div class="panel-body">
+                    <table class="table table-bordered">
+                        <tbody>
+                            <tr>
+                                <td>PurchaseId :</td>
+                                <td id="updPurchaseId">
+
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>MemoNumber :</td>
+                                <td>
+                                    <label id="updMemoNumber"></label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>ProductId:</td>
+                                <td>
+                                    <label id="updProductId"></label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>ProductName :</td>
+                                <td>
+                                    <label id="updProductName"></label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>PurchaseDate:</td>
+                                <td>
+                                    <label id="updPurchaseDate"></label>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>Quantity:
+                                    <div class="text text-muted">
+
+                                        <label id="updStockQuantity"></label>
+                                    </div>
+                                </td>
+                                <td><input type="text" class="form-control" id="updQuantity" /></td>
+                            </tr>
+
+
+                            <tr>
+                                <td>Price:
+                                    <div class="text text-muted">
+
+                                        <label id="dltStockPrice"></label>
+                                    </div>
+                                </td>
+                                <td><input type="text" class="form-control" id="updPrice" /></td>
+                            </tr>
+
+                            <tr class="info">
+                                <td colspan="2">
+                                    <input id="btnUpdate" class="btn btn-warning btn-lg" type="button"
+                                        value="Update this memo entry" />
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <label id="updatemsg" class="text text-danger"></label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--*************************************************************************************************************************************-->
+    <!--*************************************************************************************************************************************-->
+    <!--*************************************************************************************************************************************-->
+    <!--*************************************************************************************************************************************-->
+    <!--*************************************************************************************************************************************-->
+    <!--*************************************************************************************************************************************-->
+    <!-- delete memo entry-->
+    <!-- 
+                 PurchaseId
+                MemoNumber
+                ProductId
+                ProductName
+                PurchaseDate
+                Quantity
+                Price 
+-->
+    <div class="col-md-10 col-md-offset-1" id="dlt">
+        <div class="well">
+            <div class="panel panel-danger">
+                <div class="panel-heading">
+                    <h1>Delete Product Entry in Memo</h1>
+                </div>
+                <div class="panel-body">
+                    <table class="table table-bordered table-responsive table-fit">
+                        <tbody>
+                            <tr>
+                                <td>PurchaseId :</td>
+                                <td id="dltPurchaseId">
+
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>MemoNumber :</td>
+                                <td>
+                                    <label id="dltMemoNumber"></label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>ProductId:</td>
+                                <td>
+                                    <label id="dltProductId"></label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>ProductName :</td>
+                                <td>
+                                    <label id="dltProductName"></label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>PurchaseDate:</td>
+                                <td>
+                                    <label id="dltPurchaseDate"></label>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>Quantity:
+                                    <div class="text text-muted">
+                                        Avilable in Stock :
+                                        <label id="dltStockQuantity"></label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <label id="dltQuantity"></label>
+                                </td>
+                            </tr>
+
+
+                            <tr>
+                                <td>Price:
+                                    <div class="text text-muted">
+                                        Stock Price:
+                                        <label id="dltStockPrice"></label>
+                                    </div>
+                                </td>
+                                <td><label id="dltPrice"></label></td>
+                            </tr>
+
+                            <tr class="info">
+                                <td colspan="2">
+                                    <input id="btnDelete" class="btn btn-danger btn-lg" type="button"
+                                        value="Delete this memo entry" />
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <label id="deletemsg" class="text text-danger"></label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- done ******************************************************************************************************************************************-->
+    <!-- download pdf button 
+    <div class="col-md-10 col-md-offset-1">
+        <div class="well">
+
+            <a href="#" id="getInvoice" class="btn btn-primary btn-lg">Download Invoice as PDF (server generated)</a>
+        </div>
+    </div>
+-->
+    <!--*************************************************************************************************************************************-->
+    <!--*************************************************************************************************************************************-->
+    <!--*************************************************************************************************************************************-->
+    <!--*************************************************************************************************************************************-->
+    <!--*************************************************************************************************************************************-->
+    <!--*************************************************************************************************************************************-->
+    <!-- Confirm  this Purchase-->
+    <div class="col-md-10 col-md-offset-1">
+        <div class="well">
+
+            <a href="#" id="confirmPurchase" class="btn btn-success btn-lg">Confirm Purchase</a>
+        </div>
+    </div>
+    <!--*************************************************************************************************************************************-->
+    <!--*************************************************************************************************************************************-->
+    <!--*************************************************************************************************************************************-->
+    <!--*************************************************************************************************************************************-->
+    <!--*************************************************************************************************************************************-->
+    <!--*************************************************************************************************************************************-->
+
+</body>
+
+</html>

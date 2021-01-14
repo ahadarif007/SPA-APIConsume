@@ -1,0 +1,149 @@
+<html>
+<head>
+	<title>API Client</title>
+	<script type="text/javascript" src="jquery-3.4.1.js"></script>
+	<script type="text/javascript" src="employee.js"></script>
+
+</head>
+
+
+<body>
+
+
+	<h2>Employee Management</h2>
+	<hr/>
+
+	<!-- Create New Employee -->
+	<table>
+		<tr>
+			<td>Employee Name: </td>
+			<td><input type="text" id="empName"/></td>
+		</tr>
+		<tr>
+			<td>Salary:</td>
+			<td><input type="text" id="empSalary"/></td>
+		</tr>
+		<tr>
+			<td>Department ID:</td>
+			<td><input type="text" id="empDepartment"/></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td><button id="create">Create</button></td>
+		</tr>
+	</table>
+	<hr/>
+
+
+<!-- Delete Employee  -->
+	<table>
+		<tr>
+			<td>Employee Id</td>
+			<td><input type="text" id="deptId"/></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td><button id="delete">Delete</button></td>
+		</tr>
+	</table>
+
+
+
+	<hr/>
+
+
+	<br/>
+
+
+	<!-- Load All Data-->
+	<button id="load">Load Data</button>
+	<br/>
+	<label id="msg"></label>
+
+
+	<br/><br/>
+
+
+	<table id="list" border="1">
+		<thead>
+			<tr>
+				<th>Employee ID</th>
+				<th>Employee Name</th>
+				<th>Salary</th>
+				<th>Department Name </th>
+				<th> Department Id</th>
+
+			</tr>
+		</thead>
+		<tbody>
+
+		</tbody>
+	</table>
+
+<!-- Advanced Search -->
+<hr>
+<h2>Advanced Search Options</h2>
+<h5>(all data will be presented if all search field kept empty</h5>
+<hr>
+
+	<table>
+		<tr>
+			<td> Name </td>
+			<td><input type="text" id="searchName" placeholder="Input Name...."/></td>
+		</tr>
+		<tr>
+			<td>Salary Range :  </td>
+			<td><input type="number" id="minSalary" placeholder=" Minimum salary"/></td>
+
+			<td> To </td>
+			<td><input type="number" id="maxSalary" placeholder=" Maximum salary"/></td>
+		</tr>
+
+		<tr>
+			<td>ID Range :  </td>
+			<td><input type="number" id="minId" placeholder=" Lowest ID"/></td>
+
+			<td> To </td>
+			<td><input type="number" id="maxId" placeholder=" Maximum ID"/></td>
+		</tr>
+
+		<tr>
+			<td>Department ID Range :  </td>
+			<td><input type="number" id="minDId" placeholder=" Min Department ID"/></td>
+
+			<td> To </td>
+			<td><input type="number" id="maxDId" placeholder=" Max Department ID"/></td>
+		</tr>
+		
+		<tr>
+			<td> Or specific Department ID </td>
+			<td><input type="text" id="dId" placeholder="Input Department ID"/></td>
+		</tr>
+
+		<tr>
+			<td></td>
+			<td><button id="Search">search</button></td>
+		</tr>
+	</table>
+
+
+
+	<!-- Search Result-->
+
+	<table id="NewList" border="1">
+		<thead>
+			<tr>
+				<th>Employee ID</th>
+				<th>Employee Name</th>
+				<th>Salary</th>
+				<th>Department Name </th>
+				<th> Department Id</th>
+			</tr>
+		</thead>
+		<tbody>
+
+		</tbody>
+	</table>
+
+</body>
+</html>
